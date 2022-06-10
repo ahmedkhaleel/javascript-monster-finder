@@ -23,7 +23,7 @@ function showFound(monsterDiv){
     document.querySelector('.monsters').append(monster);
 }
 
-
+notFount();
 function notFount(){
     const notFoundDiv = document.createElement('div');
     notFoundDiv.className = 'p-5 not-found';
@@ -34,23 +34,34 @@ function notFount(){
 
     const h1 = document.createElement('h1');
     h1.innerText = '🧟‍♂️ No Monster Found 🧟‍♂️';
+  notFoundDiv.append(span,h1);
 
+  document.querySelector('.monsters').append(notFoundDiv);
 }
 
 document.querySelector('#search-monster').addEventListener('keyup',
     function(e){
         const keyword = e.target.value.toLowerCase();
         const findmonster = document.querySelectorAll('.monster');
+        let notFound = true;
         for(let monster of findmonster) {
           const name = monster.children[1].innerText.toLowerCase();
           const email = monster.children[2].innerText.toLowerCase();
           if (name.includes(keyword) || email.includes(keyword)) {
             monster.style.display = 'block';
+            notFound = false;
           } else {
             monster.style.display = 'none';
+
           }
 
         }
-
+      if (notFound) {
+        document.querySelector('.not-found').style.display = 'block';
+      } else{
+        document.querySelector('.not-found').style.display = 'none';
+      }
 });
+
+
 
